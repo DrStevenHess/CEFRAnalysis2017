@@ -9,9 +9,9 @@ library(gridExtra)
 library(reshape2)
 
 #Import data and global variables
-df <- read_excel("Desktop/CEFR/CEFR Database Simplified 2017I.xlsx")
+df <- read_excel("C:/Users/Qubix/Desktop/GitHub/CEFRAnalysis2017/CEFR Database Simplified 2017I.xlsx")
 alpha = 0.01 # Used for hypothesis testing.
-options(warn=-1) #suppress warnings
+#options(warn=-1) #suppress warnings
 
 
 #---------- BEGIN FUNCTIONS ----------
@@ -63,12 +63,12 @@ print("----------COMPARISON VALIDATION----------")
 if(nfact1_fa$TLI>nfact_fa$TLI)
   {
   print("TLI finds nfact1 is the better model.")
-  png(file="./nfact1_fa.png",width=800,height=800)
+  png(file="C:/Users/Qubix/Desktop/GitHub/CEFRAnalysis2017/nfact1_fa.png",width=800,height=800)
   fa.diagram(nfact1_fa, main = "FA Tree for nfact1")
   dev.off()
   } else {
   print("TLI finds nfact is the better model.")
-  png(file="./nfact_fa.png",width=800,height=800)
+  png(file="C:/Users/Qubix/Desktop/GitHub/CEFRAnalysis2017/nfact_fa.png",width=800,height=800)
   fa.diagram(nfact_fa, main = "FA Tree for nfact")  
   dev.off()
   }
@@ -122,7 +122,7 @@ data2<-filter(df,Term==8)
 data2<-data2[c(4:19)]
 T8Box<-ggplot(stack(data2[c(4:16)]), aes(x = factor(ind, levels = names(data2[c(4:16)])), y = values, colours=values)) + geom_boxplot()+scale_x_discrete(name="CEFR Category") +scale_y_continuous(name="Scale (A1=1, C2=6)")+geom_jitter(alpha=0.07)+geom_violin(alpha=0.1)+geom_boxplot(alpha = 0.25)+ ggtitle("CEFR Scores for T8") + theme(plot.title = element_text(hjust = 0.5))+theme(text=element_text(size=21))
 # Combine all into a stacked plot and render to YearCEFR.png
-png(file="./YearCEFR.png",width=4000,height=7000)
+png(file="C:/Users/Qubix/Desktop/GitHub/CEFRAnalysis2017/YearCEFR.png",width=4000,height=7000)
 grid.draw(rbind(ggplotGrob(T1Box), ggplotGrob(T2Box), ggplotGrob(T3Box), ggplotGrob(T4Box), ggplotGrob(T5Box), ggplotGrob(T6Box), ggplotGrob(T7Box), ggplotGrob(T8Box), ggplotGrob(T18Box), size="first"))
 dev.off()
 
@@ -155,6 +155,6 @@ rm(t1md, t2md, t3md, t4md, t5md, t6md, t7md, t8md, cefr, termsummary, data, df)
 
 #Melt into a stacked table using Term 
 long.dfmd<-melt(dfmd,id=c("Term"))
-png(file="./YearCEFRmeds.png",width=600,height=600)
+png(file="C:/Users/Qubix/Desktop/GitHub/CEFRAnalysis2017/YearCEFRmeds.png",width=600,height=600)
 ggplot(long.dfmd,aes(x=Term,y=variable,color=value))+geom_point(aes(size=value))+labs(y="Weight")+scale_colour_gradient(low = "red", high="green")
 dev.off()
